@@ -35,23 +35,23 @@ class Main extends PluginBase implements Listener{
       $text = "You died!"
       break;
     case EntityDamageEvent::CAUSE_CONTACT:
-				if($cause instanceof EntityDamageByBlockEvent){
-					if($cause->getDamager()->getId() === Block::CACTUS){
-						$text = "You got pricked to death!";
-					}
-				}
-				break;
-		case EntityDamageEvent::CAUSE_PROJECTILE:
-				if($cause instanceof EntityDamageByEntityEvent){
-					$e = $cause->getDamager();
-					if($e instanceof Living){
-						$text = "You were shot by $params[].";
-						$params[] = $e->getName();
-						break;
-					}else{
-						$params[] = "Unknown";
-					}
-				}
-				break;		
+	if($cause instanceof EntityDamageByBlockEvent){
+	        if($cause->getDamager()->getId() === Block::CACTUS){
+		       $text = "You got pricked to death!";
+		}
+	}
+	break;
+    case EntityDamageEvent::CAUSE_PROJECTILE:
+	if($cause instanceof EntityDamageByEntityEvent){
+	$e = $cause->getDamager();
+		if($e instanceof Living){
+			$text = "You were shot by $params[].";
+			$params[] = $e->getName();
+			break;
+		        }else{
+			$params[] = "Unknown";
+		}
+	}
+	break;		
   }
   if(isset($text)) $p->sendPopup($text);
