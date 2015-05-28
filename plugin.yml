@@ -1,1 +1,6 @@
-
+name: DeathPopup
+main: Sean_M\DeathPopup\Main
+version: "1.0.0"
+api: [1.0.0]
+description: Disables all death messages in chat - sends them in a popup to the player(s) involved with a reason.
+author: Sean_M
