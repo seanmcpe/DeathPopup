@@ -45,11 +45,20 @@ class Main extends PluginBase implements Listener{
 	if($cause instanceof EntityDamageByEntityEvent){
 	$e = $cause->getDamager();
 		if($e instanceof Living){
-			$text = "You were shot by $params[].";
+			$text = "You were shot by $params[]!";
 			$params[] = $e->getName();
 			break;
 		        }else{
 			$params[] = "Unknown";
+        break;
+    case EntityDamageEvent::CAUSE_ENTITY_ATTACK:
+        if($cause instanceof EntityDamageByEntityEvent){
+                if($e instanceof Living){
+                        $text = "You were slain by $params[]!";
+                        $param[] = $e->getName();
+                        break;
+                        }else{
+                        $params[] = "Unknown";
 		}
 	}
 	break;		
