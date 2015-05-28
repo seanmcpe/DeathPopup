@@ -12,7 +12,7 @@ class Main extends PluginBase implements Listener{
     $this->getServer()->getPluginManager()->registerEvents($this);
     $this->getLogger()->info("DeathPopup enabled!");
   }
-
+  public function onPlayerDeath(PlayerDeathEvent $event){
   $p = $event->getPlayer();
   $causeId = $p->getLastDamageCause()->getCause();
   switch($causeId){
