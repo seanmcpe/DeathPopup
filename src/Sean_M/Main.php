@@ -15,40 +15,40 @@ class Main extends PluginBase implements Listener{
   public function onPlayerDeath(PlayerDeathEvent $event){
   $p = $event->getPlayer();
   $causeId = $p->getLastDamageCause()->getCause();
+  $cause = $p->getLastDamageCause();
+  $e = $cause->getDamager();
   switch($causeId){
     case EntityDamageEvent::CAUSE_DROWNING:
-      $text = "You drowned!";
+      $p->sendPopup("You drowned!");
       break;
     case EntityDamageEvent::CAUSE_FALL:
-      $text = "You fell from a high place!";
+      $p->sendPopup("You fell from a high place!");
       break;
     case EntityDamageEvent::CAUSE_LAVA:
-      $text = "You tried to swim in lava!";
+      $p->sendPopup("You tried to swim in lava!");
       break;
     case EntityDamageEvent::CAUSE_FIRE:
-      $text = "You burned to death!";
+      $p->sendPopup("You burned to death!");
       break;
     case EntityDamageEvent::CAUSE_FIRE_TICK:
-      $text = "You burned to death!";
+      $p->sendPopup("You burned to death!");
       break;
     case EntityDamageEvent::CAUSE_SUICIDE:
-      $text = "You died!"
+      $p->sendPopup("You died!");
       break;
     case EntityDamageEvent::CAUSE_CONTACT:
 	if($cause instanceof EntityDamageByBlockEvent){
 	        if($cause->getDamager()->getId() === Block::CACTUS){
-		       $text = "You got pricked to death!";
+		       $p->sendPopup("You got pricked to death!");
 		}
 	}
       break;
     case EntityDamageEvent::CAUSE_PROJECTILE:
 	if($cause instanceof EntityDamageByEntityEvent){
-          $cause=$p->getLastDamageCause();
-	  $e = $cause->getDamager();
 		if($e instanceof Living){
-			$text = "You were shot by {$e->getName()}!";
+			$p->sendPopup("You were shot by {$e->getName()}!");
 		        else{
-			  $text = "You were killed by Unknown!";
+			  $p->sendPopup = "An unknown force has shot you!";
                         }
                 }
         }
@@ -56,11 +56,9 @@ class Main extends PluginBase implements Listener{
     case EntityDamageEvent::CAUSE_ENTITY_ATTACK:
         if($cause instanceof EntityDamageByEntityEvent){
                 if($e instanceof Living){
-                  $cause=$p->getLastDamageCause();
-                  $e = $cause->getDamager();
-                        $text = "You were slain by {$e->getName()}!";
+                        $p->sendPopup("You were slain by {$e->getName()}!");
                         else{
-                          $text = "You were killed by Unknown!";
+                          $p->sendPopup("An unknown force has slain you!");
                         }
 		}
 	}
