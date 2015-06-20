@@ -43,7 +43,8 @@ class Main extends PluginBase implements Listener{
       break;
     case EntityDamageEvent::CAUSE_PROJECTILE:
 	if($cause instanceof EntityDamageByEntityEvent){
-	$e = $cause->getDamager();
+          $cause=$p->getLastDamageCause();
+	  $e = $cause->getDamager();
 		if($e instanceof Living){
 			$text = "You were shot by {$e->getName()}!";
 		        else{
@@ -55,6 +56,8 @@ class Main extends PluginBase implements Listener{
     case EntityDamageEvent::CAUSE_ENTITY_ATTACK:
         if($cause instanceof EntityDamageByEntityEvent){
                 if($e instanceof Living){
+                  $cause=$p->getLastDamageCause();
+                  $e = $cause->getDamager();
                         $text = "You were slain by {$e->getName()}!";
                         else{
                           $text = "You were killed by Unknown!";
