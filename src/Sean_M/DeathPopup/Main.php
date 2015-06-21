@@ -16,7 +16,6 @@ class Main extends PluginBase implements Listener{
   $p = $event->getPlayer();
   $causeId = $p->getLastDamageCause()->getCause();
   $cause = $p->getLastDamageCause();
-  $e = $cause->getDamager();
   switch($causeId){
     case EntityDamageEvent::CAUSE_DROWNING:
       $p->sendPopup("You drowned!");
@@ -45,11 +44,12 @@ class Main extends PluginBase implements Listener{
       break;
     case EntityDamageEvent::CAUSE_PROJECTILE:
 	if($cause instanceof EntityDamageByEntityEvent){
+            $e = $cause->getDamager();
 		if($e instanceof Living){
 			$p->sendPopup("You were shot by {$e->getName()}!");
-		        else{
-			  $p->sendPopup = "An unknown force has shot you!";
-                        }
+                        if($e instanceof Player) $e->sendMessage("You shot {$p->getName()}!");
+		}else{
+			  $p->sendPopup("An unknown force has shot you!");
                 }
         }
       break;
@@ -57,11 +57,13 @@ class Main extends PluginBase implements Listener{
         if($cause instanceof EntityDamageByEntityEvent){
                 if($e instanceof Living){
                         $p->sendPopup("You were slain by {$e->getName()}!");
-                        else{
+                        if($e instanceof Player) $e->sendPopup("You shot {$p->getName()}");
+                }else{
                           $p->sendPopup("An unknown force has slain you!");
                         }
 		}
 	}
 	break;		
   }
-  if(isset($text)) $p->sendPopup($text);
+ }
+}
