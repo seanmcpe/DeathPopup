@@ -21,7 +21,7 @@ class Main extends PluginBase implements Listener{
   }
 
   public function onPlayerDeath(PlayerDeathEvent $event){
-  $p = $event->getPlayer();
+  $p = $event->getEntity();
   $causeId = $p->getLastDamageCause()->getCause();
   $cause = $p->getLastDamageCause();
   switch($causeId){
