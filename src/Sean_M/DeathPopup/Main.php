@@ -1,6 +1,8 @@
 <?php
 namespace Sean_M\DeathPopup;
 
+use pocketmine\plugin\PluginBase;
+use pocketmine\event\Listener;
 use pocketmine\Player;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\entity\EntityDamageByBlockEvent;
