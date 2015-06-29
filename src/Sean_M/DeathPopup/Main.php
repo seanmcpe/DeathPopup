@@ -12,7 +12,7 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 class Main extends PluginBase implements Listener{
   
   public function onEnable(){      
-    $this->getServer()->getPluginManager()->registerEvents($this);
+    $this->getServer()->getPluginManager()->registerEvents($this, $this);
     $this->getLogger()->info("DeathPopup enabled!");
   }
     
